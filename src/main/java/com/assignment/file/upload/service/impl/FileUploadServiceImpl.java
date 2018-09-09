@@ -1,6 +1,7 @@
 package com.assignment.file.upload.service.impl;
 
 import com.assignment.file.upload.exception.FileUploadException;
+import com.assignment.file.upload.property.FileUploadProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
@@ -22,12 +23,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     private final Path fileStorageLocation;
 
-    @Value("${file.upload-dir}")
-    private String uploadDirectory;
-
     @Autowired
-    public FileUploadServiceImpl() {
-        this.fileStorageLocation = Paths.get(uploadDirectory)
+    public FileUploadServiceImpl(FileUploadProperties fileUploadProperties) {
+        this.fileStorageLocation = Paths.get(fileUploadProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 
         try {
