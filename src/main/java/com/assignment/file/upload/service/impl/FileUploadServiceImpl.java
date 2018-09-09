@@ -36,11 +36,11 @@ public class FileUploadServiceImpl implements FileUploadService {
     }
 
     public String storeFile(MultipartFile file) {
-        // Normalize file name
+
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            // Check if the file's name contains invalid characters
+            // Check if the file name has invalid characters
             if(fileName.contains("..")) {
                 throw new FileUploadException("Sorry! Filename contains invalid path sequence " + fileName);
             }
